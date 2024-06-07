@@ -3,13 +3,13 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 // Usar el middleware CORS
 app.use(cors());
 
 // Endpoint que devuelve los productos desde el JSON
-app.get('/backendmock/productos', (req, res) => {
+app.get('/api/productos', (req, res) => {
     const filePath = path.join(__dirname, 'mocks','productos.json');
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
@@ -21,5 +21,5 @@ app.get('/backendmock/productos', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Backend server is running at http://localhost:${port}`);
+    console.log(`Backend corriendo en puerto: ${port}`);
 });
