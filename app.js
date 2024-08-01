@@ -9,11 +9,23 @@ const port = process.env.PORT || 4000;
 app.use(cors());
 
 // Endpoint que devuelve los productos desde el JSON
-app.get('/api/productos', (req, res) => {
+app.get('/mocks/productos', (req, res) => {
     const filePath = path.join(__dirname, 'mocks','productos.json');
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             res.status(500).json({ error: 'Error leyendo el archivo de productos' });
+            return;
+        }
+        res.json(JSON.parse(data));
+    });
+});
+
+// Endpoint que devuelve los archivos desde el JSON
+app.get('/mocks/archivos', (req, res) => {
+    const filePath = path.join(__dirname, 'mocks','archivos.json');
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            res.status(500).json({ error: 'Error leyendo el archivo de archivos' });
             return;
         }
         res.json(JSON.parse(data));
